@@ -23,6 +23,6 @@ public class Board {
     private String name;
 
     @OneToMany(mappedBy = "board", cascade = {CascadeType.ALL})
-    private List<ColumnStatus> columns_status;
+    private List<ColumnStatus> columnsStatus;
 
 }

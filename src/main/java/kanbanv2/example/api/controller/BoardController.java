@@ -1,6 +1,7 @@
 package kanbanv2.example.api.controller;
 
 import kanbanv2.example.api.dto.BoardDTO;
+import kanbanv2.example.api.entity.Board;
 import kanbanv2.example.api.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,15 +35,15 @@ public class BoardController {
     }
 
     @PostMapping
-    public ResponseEntity<BoardDTO> saveBoard(@RequestBody BoardDTO boardDTO) {
-        return ResponseEntity.ok(boardService.saveBoard(boardDTO));
+    public ResponseEntity<BoardDTO> saveBoard(@RequestBody Board board) {
+        return ResponseEntity.ok(boardService.saveBoard(board));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BoardDTO> updateBoard(@PathVariable Long id, @RequestBody BoardDTO boardDTO) {
+    public ResponseEntity<BoardDTO> updateBoard(@PathVariable Long id, @RequestBody Board board) {
         Optional<BoardDTO> existingBoard = boardService.getBoardById(id);
         if (existingBoard.isPresent()) {
-            return ResponseEntity.ok(boardService.updateBoard(boardDTO, id));
+            return ResponseEntity.ok(boardService.updateBoard(board, id));
         }
         return ResponseEntity.notFound().build();
     }

@@ -18,7 +18,7 @@ public class BoardMapper {
 
         dto.setId(board.getId());
         dto.setName(board.getName());
-        dto.setColumnStatus(board.getColumns_status().stream().map(BoardMapper::mapColumnDTO).collect(Collectors.toList()));
+//        dto.setColumnStatus(board.getColumns_status().stream().map(BoardMapper::mapColumnDTO).collect(Collectors.toList()));
 
         return dto;
     }
@@ -64,10 +64,10 @@ public class BoardMapper {
 
         board.setId(board.getId());
         board.setName(boardDTO.getName());
-        board.setColumns_status(boardDTO.getColumnStatus()
-                .stream()
-                .map(BoardMapper::mapColumnToEntity)
-                .collect(Collectors.toList()));
+//        board.setColumns_status(boardDTO.getColumnStatus()
+//                .stream()
+//                .map(BoardMapper::mapColumnToEntity)
+//                .collect(Collectors.toList()));
 
         return board;
     }

@@ -35,11 +35,9 @@ public class BoardService {
     }
 
     @Transactional
-    public BoardDTO saveBoard(BoardDTO boardDTO) {
-        Board board = BoardMapper.toEntity(boardDTO);
-
-        if (board.getColumns_status() != null) {
-            board.getColumns_status().forEach(column -> column.setBoard(board));
+    public BoardDTO saveBoard(Board board) {
+        if (board.getColumnsStatus() != null) {
+            board.getColumnsStatus().forEach(column -> column.setBoard(board));
         }
 
         Board boardSaved = boardRepository.save(board);
@@ -48,7 +46,7 @@ public class BoardService {
 
 
     @Transactional
-    public BoardDTO updateBoard(BoardDTO boardDTO, long id) {
+    public BoardDTO updateBoard(Board board, long id) {
 
         Optional<Board> existingBoardOpt = boardRepository.findById(id);
 
@@ -57,15 +55,14 @@ public class BoardService {
         }
 
         Board existingBoard = existingBoardOpt.get();
-        existingBoard.setName(boardDTO.getName());
+        existingBoard.setName(board.getName());
 
-        existingBoard.getColumns_status().clear();
+        existingBoard.getColumnsStatus().clear();
 
-        if (boardDTO.getColumnStatus() != null) {
-            boardDTO.getColumnStatus().forEach(columnDTO -> {
-                ColumnStatus column = BoardMapper.mapColumnToEntity(columnDTO);
+        if (board.getColumnsStatus() != null) {
+            board.getColumnsStatus().forEach(column -> {
                 column.setBoard(existingBoard);
-                existingBoard.getColumns_status().add(column);
+                existingBoard.getColumnsStatus().add(column);
             });
         }
 
