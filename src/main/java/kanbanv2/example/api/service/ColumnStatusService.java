@@ -3,6 +3,7 @@ package kanbanv2.example.api.service;
 import kanbanv2.example.api.dao.BoardRepository;
 import kanbanv2.example.api.dao.ColumnStatusRepository;
 import kanbanv2.example.api.dto.ColumnStatusDTO;
+import kanbanv2.example.api.dto.ColumnStatusListDTO;
 import kanbanv2.example.api.entity.Board;
 import kanbanv2.example.api.entity.ColumnStatus;
 import kanbanv2.example.api.entity.Task;
@@ -28,9 +29,14 @@ public class ColumnStatusService {
     }
 
 
-    public List<ColumnStatusDTO> getAllColumnStatuses() {
+    public List<ColumnStatusListDTO> getAllColumnStatuses() {
         List<ColumnStatus> columnStatuses = columnStatusRepository.findAll();
-        return columnStatuses.stream().map(BoardMapper::mapColumnDTO).collect(Collectors.toList());
+        return columnStatuses.stream().map(BoardMapper::mapColumnListDTO).collect(Collectors.toList());
+    }
+
+    public List<ColumnStatusListDTO> getColumnListByBoardId(long id) {
+        List<ColumnStatus> columnStatuses = columnStatusRepository.findByBoardId(id);
+        return columnStatuses.stream().map(BoardMapper::mapColumnListDTO).collect(Collectors.toList());
     }
 
     public Optional<ColumnStatusDTO> getColumnById(long id) {

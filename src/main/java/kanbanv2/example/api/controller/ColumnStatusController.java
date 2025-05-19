@@ -1,6 +1,7 @@
 package kanbanv2.example.api.controller;
 
 import kanbanv2.example.api.dto.ColumnStatusDTO;
+import kanbanv2.example.api.dto.ColumnStatusListDTO;
 import kanbanv2.example.api.service.ColumnStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,14 +24,13 @@ public class ColumnStatusController {
 
 
     @GetMapping
-    public ResponseEntity<List<ColumnStatusDTO>> getAll() {
+    public ResponseEntity<List<ColumnStatusListDTO>> getAll() {
         return ResponseEntity.ok(columnStatusService.getAllColumnStatuses()) ;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ColumnStatusDTO> getById(@PathVariable Long id) {
-        Optional<ColumnStatusDTO> ColumnDTO = columnStatusService.getColumnById(id);
-        return ColumnDTO.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<List<ColumnStatusListDTO>> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(columnStatusService.getColumnListByBoardId(id)) ;
     }
 
     @PostMapping

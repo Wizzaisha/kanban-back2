@@ -1,9 +1,6 @@
 package kanbanv2.example.api.mapper;
 
-import kanbanv2.example.api.dto.BoardDTO;
-import kanbanv2.example.api.dto.ColumnStatusDTO;
-import kanbanv2.example.api.dto.SubtaskDTO;
-import kanbanv2.example.api.dto.TaskDTO;
+import kanbanv2.example.api.dto.*;
 import kanbanv2.example.api.entity.Board;
 import kanbanv2.example.api.entity.ColumnStatus;
 import kanbanv2.example.api.entity.Subtask;
@@ -34,6 +31,29 @@ public class BoardMapper {
 
         return dto;
 
+    }
+
+    public static ColumnStatusListDTO mapColumnListDTO(ColumnStatus columnStatus) {
+        ColumnStatusListDTO dto = new ColumnStatusListDTO();
+
+        dto.setId(columnStatus.getId());
+        dto.setName(columnStatus.getName());
+        dto.setBoardId(columnStatus.getBoard().getId());
+        dto.setTasks(columnStatus.getTasks().stream().map(BoardMapper::mapTaskListDTO).collect(Collectors.toList()));
+
+        return dto;
+
+    }
+
+    public static TaskListDTO mapTaskListDTO(Task task) {
+        TaskListDTO dto = new TaskListDTO();
+
+        dto.setId(task.getId());
+        dto.setTitle(task.getTitle());
+        dto.setColumnStatusId(task.getColumnStatus().getId());
+        dto.setDescription(task.getDescription());
+
+        return dto;
     }
 
     public static TaskDTO mapTaskDTO(Task task) {
