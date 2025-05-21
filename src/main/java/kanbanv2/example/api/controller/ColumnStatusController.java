@@ -24,12 +24,12 @@ public class ColumnStatusController {
 
 
     @GetMapping
-    public ResponseEntity<List<ColumnStatusListDTO>> getAll() {
+    public ResponseEntity<List<ColumnStatusDTO>> getAll() {
         return ResponseEntity.ok(columnStatusService.getAllColumnStatuses()) ;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<ColumnStatusListDTO>> getById(@PathVariable Long id) {
+    public ResponseEntity<List<ColumnStatusDTO>> getById(@PathVariable Long id) {
         return ResponseEntity.ok(columnStatusService.getColumnListByBoardId(id)) ;
     }
 

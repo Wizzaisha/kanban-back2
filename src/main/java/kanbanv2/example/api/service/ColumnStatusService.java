@@ -29,14 +29,14 @@ public class ColumnStatusService {
     }
 
 
-    public List<ColumnStatusListDTO> getAllColumnStatuses() {
+    public List<ColumnStatusDTO> getAllColumnStatuses() {
         List<ColumnStatus> columnStatuses = columnStatusRepository.findAll();
-        return columnStatuses.stream().map(BoardMapper::mapColumnListDTO).collect(Collectors.toList());
+        return columnStatuses.stream().map(BoardMapper::mapColumnDTO).collect(Collectors.toList());
     }
 
-    public List<ColumnStatusListDTO> getColumnListByBoardId(long id) {
+    public List<ColumnStatusDTO> getColumnListByBoardId(long id) {
         List<ColumnStatus> columnStatuses = columnStatusRepository.findByBoardId(id);
-        return columnStatuses.stream().map(BoardMapper::mapColumnListDTO).collect(Collectors.toList());
+        return columnStatuses.stream().map(BoardMapper::mapColumnDTO).collect(Collectors.toList());
     }
 
     public Optional<ColumnStatusDTO> getColumnById(long id) {
