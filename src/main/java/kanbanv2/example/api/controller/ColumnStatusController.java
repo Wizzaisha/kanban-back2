@@ -1,7 +1,6 @@
 package kanbanv2.example.api.controller;
 
 import kanbanv2.example.api.dto.ColumnStatusDTO;
-import kanbanv2.example.api.dto.ColumnStatusListDTO;
 import kanbanv2.example.api.service.ColumnStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

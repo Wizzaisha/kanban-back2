@@ -3,7 +3,6 @@ package kanbanv2.example.api.service;
 import kanbanv2.example.api.dao.BoardRepository;
 import kanbanv2.example.api.dao.ColumnStatusRepository;
 import kanbanv2.example.api.dto.ColumnStatusDTO;
-import kanbanv2.example.api.dto.ColumnStatusListDTO;
 import kanbanv2.example.api.entity.Board;
 import kanbanv2.example.api.entity.ColumnStatus;
 import kanbanv2.example.api.entity.Task;
