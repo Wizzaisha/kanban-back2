@@ -1,8 +1,6 @@
 package kanbanv2.example.api.controller;
 
-import kanbanv2.example.api.dto.ColumnStatusDTO;
 import kanbanv2.example.api.dto.TaskDTO;
-import kanbanv2.example.api.service.ColumnStatusService;
 import kanbanv2.example.api.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +11,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/tasks")
-@CrossOrigin(origins = "*")
 public class TaskController {
 
     private final TaskService taskService;

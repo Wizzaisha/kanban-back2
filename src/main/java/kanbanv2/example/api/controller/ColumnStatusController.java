@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/columns")
-@CrossOrigin(origins = "*")
 public class ColumnStatusController {
 
     private final ColumnStatusService columnStatusService;
