@@ -4,6 +4,7 @@ import kanbanv2.example.api.dao.BoardRepository;
 import kanbanv2.example.api.dto.BoardDTO;
 import kanbanv2.example.api.entity.Board;
 import kanbanv2.example.api.entity.ColumnStatus;
+import kanbanv2.example.api.entity.Subtask;
 import kanbanv2.example.api.mapper.BoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,7 +47,7 @@ public class BoardService {
 
 
     @Transactional
-    public BoardDTO updateBoard(Board board, long id) {
+    public BoardDTO updateBoard(BoardDTO board, long id) {
 
         Optional<Board> existingBoardOpt = boardRepository.findById(id);
 
@@ -55,14 +56,16 @@ public class BoardService {
         }
 
         Board existingBoard = existingBoardOpt.get();
+
         existingBoard.setName(board.getName());
 
         existingBoard.getColumnsStatus().clear();
 
-        if (board.getColumnsStatus() != null) {
-            board.getColumnsStatus().forEach(column -> {
-                column.setBoard(existingBoard);
-                existingBoard.getColumnsStatus().add(column);
+        if (board.getColumnStatus() != null) {
+            board.getColumnStatus().forEach(columnDTO -> {
+                ColumnStatus columnStatus = BoardMapper.mapColumnToEntity(columnDTO);
+                columnStatus.setBoard(existingBoard);
+                existingBoard.getColumnsStatus().add(columnStatus);
             });
         }
 

@@ -16,6 +16,7 @@ public class BoardController {
 
     private final BoardService boardService;
 
+
     @Autowired
     public BoardController(BoardService boardService) {
         this.boardService = boardService;
@@ -39,10 +40,12 @@ public class BoardController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BoardDTO> updateBoard(@PathVariable Long id, @RequestBody Board board) {
+    public ResponseEntity<BoardDTO> updateBoard(@PathVariable Long id, @RequestBody BoardDTO boardDTO) {
+
         Optional<BoardDTO> existingBoard = boardService.getBoardById(id);
+
         if (existingBoard.isPresent()) {
-            return ResponseEntity.ok(boardService.updateBoard(board, id));
+            return ResponseEntity.ok(boardService.updateBoard(boardDTO, id));
         }
         return ResponseEntity.notFound().build();
     }
