@@ -15,7 +15,7 @@ public class BoardMapper {
 
         dto.setId(board.getId());
         dto.setName(board.getName());
-//        dto.setColumnStatus(board.getColumns_status().stream().map(BoardMapper::mapColumnDTO).collect(Collectors.toList()));
+        dto.setColumnStatus(board.getColumnsStatus().stream().map(BoardMapper::mapColumnDTO).collect(Collectors.toList()));
 
         return dto;
     }
