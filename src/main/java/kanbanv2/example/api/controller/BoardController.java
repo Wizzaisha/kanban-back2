@@ -41,7 +41,7 @@ public class BoardController {
 
     @PutMapping("/{id}")
     public ResponseEntity<BoardDTO> updateBoard(@PathVariable Long id, @RequestBody BoardDTO boardDTO) {
-
+        System.out.println(boardDTO.toString());
         Optional<BoardDTO> existingBoard = boardService.getBoardById(id);
 
         if (existingBoard.isPresent()) {

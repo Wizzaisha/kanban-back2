@@ -37,8 +37,8 @@ public class BoardService {
 
     @Transactional
     public BoardDTO saveBoard(Board board) {
-        if (board.getColumnsStatus() != null) {
-            board.getColumnsStatus().forEach(column -> column.setBoard(board));
+        if (board.getColumnStatus() != null) {
+            board.getColumnStatus().forEach(column -> column.setBoard(board));
         }
 
         Board boardSaved = boardRepository.save(board);
@@ -47,29 +47,26 @@ public class BoardService {
 
 
     @Transactional
-    public BoardDTO updateBoard(BoardDTO board, long id) {
+    public BoardDTO updateBoard(BoardDTO boardDTO, long id) {
 
-        Optional<Board> existingBoardOpt = boardRepository.findById(id);
+        System.out.println(boardDTO.toString());
+        Board existingBoardOpt = boardRepository.findById(id).orElseThrow(() -> new RuntimeException("Board not found"));;
 
-        if (existingBoardOpt.isEmpty()) {
-            throw new RuntimeException("Board not found");
-        }
+        existingBoardOpt.setName(boardDTO.getName());
 
-        Board existingBoard = existingBoardOpt.get();
+        existingBoardOpt.getColumnStatus().clear();
 
-        existingBoard.setName(board.getName());
-
-        existingBoard.getColumnsStatus().clear();
-
-        if (board.getColumnStatus() != null) {
-            board.getColumnStatus().forEach(columnDTO -> {
+        if (boardDTO.getColumnStatus() != null) {
+            boardDTO.getColumnStatus().forEach(columnDTO -> {
                 ColumnStatus columnStatus = BoardMapper.mapColumnToEntity(columnDTO);
-                columnStatus.setBoard(existingBoard);
-                existingBoard.getColumnsStatus().add(columnStatus);
+                columnStatus.setBoard(existingBoardOpt);
+                existingBoardOpt.getColumnStatus().add(columnStatus);
             });
         }
 
-        Board updatedBoard = boardRepository.save(existingBoard);
+        System.out.println(existingBoardOpt.toString());
+
+        Board updatedBoard = boardRepository.save(existingBoardOpt);
         return BoardMapper.toDTO(updatedBoard);
     }
 

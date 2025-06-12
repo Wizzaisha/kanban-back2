@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Board {
 
     @Id
@@ -23,6 +24,6 @@ public class Board {
     private String name;
 
     @OneToMany(mappedBy = "board", cascade = {CascadeType.ALL})
-    private List<ColumnStatus> columnsStatus;
+    private List<ColumnStatus> columnStatus;
 
 }
