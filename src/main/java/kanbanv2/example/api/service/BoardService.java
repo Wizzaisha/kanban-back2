@@ -40,7 +40,7 @@ public class BoardService {
         if (board.getColumnStatus() != null) {
             board.getColumnStatus().forEach(column -> column.setBoard(board));
         }
-
+        System.out.println(board);
         Board boardSaved = boardRepository.save(board);
         return BoardMapper.toDTO(boardSaved);
     }
@@ -55,6 +55,8 @@ public class BoardService {
         existingBoardOpt.setName(boardDTO.getName());
 
         existingBoardOpt.getColumnStatus().clear();
+
+        System.out.println(boardDTO);
 
         if (boardDTO.getColumnStatus() != null) {
             boardDTO.getColumnStatus().forEach(columnDTO -> {
